@@ -1,0 +1,38 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+print("\n--- Simulación de un Pulso Simple ---")
+
+# 1. Definir el "tiempo" o eje x
+# Simularemos 1000 puntos que representan 2 segundos de tiempo
+# np.linspace(inicio, fin, numero_de_puntos)
+tiempo = np.linspace(0, 2, 1000) # De 0 a 2 segundos, con 1000 puntos
+
+# 2. Simular un "pulso" (una onda senoidal con algunas características)
+# Un pulso cardíaco no es una senoidal perfecta, pero para simularlo es un buen inicio.
+# np.sin(2 * np.pi * frecuencia * tiempo)
+frecuencia_pulso = 3 # Frecuencia de la onda (ej. 3 "pulsos" por segundo)
+amplitud = 0.5 # Qué tan "alto" es el pulso
+offset = 1.0 # Un valor base, ya que la señal de un sensor no va de -1 a 1
+
+# Generamos la onda senoidal
+pulso_simple = amplitud * np.sin(2 * np.pi * frecuencia_pulso * tiempo) + offset
+
+# 3. Añadir un poco de "ruido" a la señal (simulando imperfecciones del sensor)
+# np.random.normal(media, desviacion_estandar, tamaño)
+ruido = np.random.normal(0, 0.05, tiempo.shape) # Ruido aleatorio centrado en 0, pequeño
+pulso_con_ruido = pulso_simple + ruido
+
+# 4. Graficar la señal simulada
+plt.figure(figsize=(10, 5)) # Tamaño del gráfico (ancho, alto)
+plt.plot(tiempo, pulso_con_ruido, label='Pulso Simulado con Ruido', color='purple', alpha=0.7)
+plt.plot(tiempo, pulso_simple, label='Pulso Original (sin ruido)', color='blue', linestyle='--', alpha=0.8)
+
+plt.title("Simulación de un Pulso Opcional con Ruido")
+plt.xlabel("Tiempo (segundos)")
+plt.ylabel("Amplitud de la Señal (unidades arbitrarias)")
+plt.grid(True) # Muestra una cuadrícula
+plt.legend() # Muestra la leyenda (los nombres de las líneas)
+plt.show() # Muestra el gráfico
+
+print("\nSimulación de pulso generada y graficada. Revisa la ventana del gráfico.")
