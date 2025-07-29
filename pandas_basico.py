@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np 
 import sys
 
-print("--- Cargando Datos del CSV ---")
+print("--- Cargando Datos del CSV... ---")
 
 try:
     # pd.read_csv() es la función de Pandas para leer archivos CSV
